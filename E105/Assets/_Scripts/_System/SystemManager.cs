@@ -16,7 +16,7 @@ public class SystemManager : MonoBehaviour
     public float _hour_time_changemeter = 1000;
     private int _player_gold;
     public GameObject _light;
-    public GameObject MapObject;
+    public GameObject _MapObject;
     public PlayerSystem _player;
     public WeatherManager _weatherManager;
     public BuffManager _buffManager;
@@ -27,7 +27,7 @@ public class SystemManager : MonoBehaviour
     static int _sector_size = 8;
     public int _purification_size;
     public bool[] _purification = new bool[_sector_size];
-    public GameObject[] _sector = new GameObject[_sector_size + 2];
+    // public GameObject[] _sector = new GameObject[_sector_size + 2];
     public SectorObject _sectorTest;
     private SectorObject[] _sectors;
     public GameObject[] _randomNPC = new GameObject[2];
@@ -44,10 +44,11 @@ public class SystemManager : MonoBehaviour
         _minute = 0;
         _minute_display = 0;
         _player = GameObject.Find("PlayerObject").GetComponent<PlayerSystem>();
-        // _sectors = MapObject.GetComponentsInChildren<SectorObject>();
         // _weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
         _buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _NPCManager = GameObject.Find("NPCManager").GetComponent<NPCManager>();
+        _MapObject = GameObject.Find("Map");
+        _sectors = _MapObject.GetComponentsInChildren<SectorObject>();
     }
 
     // Update is called once per frame
@@ -61,7 +62,7 @@ public class SystemManager : MonoBehaviour
     {
         Debug.Log("계절이 바뀌었습니다.");
         _season = index;
-        MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
+        _MapObject.GetComponent<MapObject>().UpdateFieldManager(index);
     }
 
     public void UpdatePurification(int index)  //1번부터 
@@ -73,14 +74,14 @@ public class SystemManager : MonoBehaviour
             case 3:
             case 4:
                 _purification[index - 1] = true;
-                MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
+                _MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
                 _NPCManager.NPCActive(index - 1);
                 break;
             case 6:
             case 7:
                 _purification[index - 1] = true;
-                MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
-                MapObject.GetComponent<MapObject>().ChangePurifier(7);
+                _MapObject.GetComponent<MapObject>().ChangePurifier(index - 1);
+                _MapObject.GetComponent<MapObject>().ChangePurifier(7);
                 _NPCManager.NPCActive(index - 2);
                 break;
 
@@ -161,10 +162,10 @@ public class SystemManager : MonoBehaviour
     {
 
         // 모든 SectorObject의 DayEnd 동작
-        foreach (var sector in _sectors)
-        {
-            sector.DayEnd();
-        }
+        // foreach (var sector in _sectors)
+        // {
+        //     sector.DayEnd();
+        // }
 
         // _sectorTest.DayEnd();
 

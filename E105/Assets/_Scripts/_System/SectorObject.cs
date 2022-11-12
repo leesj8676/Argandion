@@ -61,6 +61,7 @@ public class SectorObject : MonoBehaviour
 
     public void DayEnd()
     {
+
     }
 
     public void DayStart()
@@ -126,7 +127,6 @@ public class SectorObject : MonoBehaviour
     public void Purifier()
     {
         _purifier = true;
-        
         //나무 오브젝트 등등 정화된 걸로 바꾸기
     }
 }
