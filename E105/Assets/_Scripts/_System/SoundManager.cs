@@ -31,14 +31,16 @@ public class SoundManager : MonoBehaviour
     {
         playBGM1();
     }
-    public void playBGM1()
+    public void playBGM1()  //정화
     {
+        bgmPlayer.Stop();
         bgmPlayer.clip = bgmSounds[0].clip;
         bgmPlayer.Play();
     }
 
-    public void playBGM2()
+    public void playBGM2()  //황폐화
     {
+        bgmPlayer.Stop();
         bgmPlayer.clip = bgmSounds[1].clip;
         bgmPlayer.Play();
     }
