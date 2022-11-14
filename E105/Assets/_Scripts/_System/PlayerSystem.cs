@@ -18,6 +18,7 @@ public class PlayerSystem : MonoBehaviour
     public Chest _theChest;
     public GameObject _buffManagerObject;
     private BuffManager _buff;
+    private SoundManager _sound;
 
     private GameObject _nearObject;
     private Item _itemManager;
@@ -91,6 +92,7 @@ public class PlayerSystem : MonoBehaviour
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         _itemManager = GameObject.Find("ItemManager").GetComponent<Item>();
         _character = GameObject.Find("PlayerBody").transform;
+        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -575,6 +577,7 @@ public class PlayerSystem : MonoBehaviour
 
         if (other.gameObject.CompareTag("droppedItem"))
         {
+            _sound.playEffectSound("GETITEM");
             Debug.Log("아이템 가까이에 있음");
             _nearObject = other.gameObject;
             DroppedItem item = _nearObject.GetComponent<DroppedItem>();

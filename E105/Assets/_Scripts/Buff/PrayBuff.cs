@@ -20,6 +20,7 @@ public class PrayBuff : MonoBehaviour
     {
         tempDay = systemManager._day;
         buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        
     }
 
     // void Update()

@@ -24,7 +24,8 @@ public class SoundManager : MonoBehaviour
     private float Sound_Effect = 0.5f;
 
     private UIManager _UIManager;
-
+    public AudioClip getItemSound;
+    public AudioSource effectSoundPlayer;
     // option panal
     // public GameObject _optionpanel;
     // public GameObject _optionpanelfrommain;
@@ -33,8 +34,9 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        playBGM1();
+        // playBGM1();
     }
+
     public void playBGM1()  //정화
     {
         bgmPlayer.Stop();
@@ -105,4 +107,13 @@ public class SoundManager : MonoBehaviour
         return Sound_Effect;
     }
 
+    public void playEffectSound(string action)
+    {
+        switch(action) {
+            case "GETITEM":
+                effectSoundPlayer.clip = getItemSound;
+                break;
+        }
+        effectSoundPlayer.Play();
+    }
 }

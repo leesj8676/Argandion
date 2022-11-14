@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 <<<<<<<< HEAD:E105/Assets/_Scripts/Building/WorldTree.cs.meta
+<<<<<<< Updated upstream
 guid: 9f358726747228b4e9f4733047ad5434
+=======
+guid: e2c9d6e1c02966f489a70d15d86aedf7
+>>>>>>> Stashed changes
 ========
 guid: bf123d0c09321f8439960ef45d80d23e
 >>>>>>>> origin/feature/2Resource:E105/Assets/_Scripts/NPC/TreeCamera.cs.meta
