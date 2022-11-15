@@ -24,8 +24,16 @@ public class SoundManager : MonoBehaviour
     private float Sound_Effect = 0.5f;
 
     private UIManager _UIManager;
-    public AudioClip getItemSound;
     public AudioSource effectSoundPlayer;
+    public AudioClip getItem;
+    public AudioClip drinking;
+    public AudioClip eating;
+
+    private bool canplay = true;
+    public AudioSource playerSoundPlayer;
+    public AudioClip moving;
+    public AudioClip axing;
+    public AudioClip picking;
     // option panal
     // public GameObject _optionpanel;
     // public GameObject _optionpanelfrommain;
@@ -111,9 +119,47 @@ public class SoundManager : MonoBehaviour
     {
         switch(action) {
             case "GETITEM":
-                effectSoundPlayer.clip = getItemSound;
+                effectSoundPlayer.clip = getItem;
+                break;
+            case "DRINKING":
+                effectSoundPlayer.clip = drinking;
+                break;
+            case "EATING":
+                effectSoundPlayer.clip = eating;
+                break;
+            case "AXING":
+                effectSoundPlayer.clip = axing;
+                break;
+            case "PICKING":
+                effectSoundPlayer.clip = picking;
                 break;
         }
         effectSoundPlayer.Play();
+    }
+
+    public void playerEffectSound(string action)
+    {
+        if(canplay){
+            switch(action) {
+                case "MOVING":
+                    playerSoundPlayer.clip = moving;
+                    canplay = false;
+                    Invoke("CanPlayTrue", 0.4f);
+                    break;
+                case "RUNNING":
+                    playerSoundPlayer.clip = moving;
+                    canplay = false;
+                    Invoke("CanPlayTrue", 0.35f);
+                    break;
+                case "AXING":
+                    playerSoundPlayer.clip = axing;
+                    break;
+            }
+            playerSoundPlayer.Play();
+        }
+    }
+
+    private void CanPlayTrue() {
+        canplay = true;
     }
 }

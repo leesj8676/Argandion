@@ -9,6 +9,7 @@ public class TreeObject : MonoBehaviour
     public bool _isFallen;
     public BuffManager _buff;
     public GameObject[] _droppedItem = new GameObject[3];
+    private SoundManager _sound;
 
     public GameObject[] _trees = new GameObject[8];
     public Collider _box;
@@ -16,6 +17,7 @@ public class TreeObject : MonoBehaviour
     private SectorObject _sector;
     void Start()
     {
+        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _itemParent = GameObject.Find("Items");
         _sector = gameObject.transform.parent.gameObject.transform.parent.GetComponent<SectorObject>();
@@ -46,12 +48,18 @@ public class TreeObject : MonoBehaviour
     public void Damaged(float damage)
     {
         _health -= damage;
+        Invoke("DamagedSound", 0.15f);
         if (_health <=0 )
         {
             DestroyWood();
         }
     }
 
+    private void DamagedSound()
+    {
+        _sound.playEffectSound("AXING");
+    }
+    
     private void DestroyWood()
     {
         Transform trans = gameObject.transform;

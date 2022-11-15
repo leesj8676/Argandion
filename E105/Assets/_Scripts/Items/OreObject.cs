@@ -9,31 +9,34 @@ public class OreObject : MonoBehaviour
     public GameObject[] _droppedItem = new GameObject[2];
     public int[,] _droppedCount = new int[2,2];
     public BuffManager _buff;
+    private SoundManager _sound;
 
     void Start()
     {
         _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
+        _sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         switch(type)
         {
             case 0:
                 _droppedCount[0,0] = 0;
-                _droppedCount[0,0] = 4;
+                _droppedCount[0,1] = 4;
                 _droppedCount[1,0] = 1;
                 _droppedCount[1,1] = 3;
                 break;
             case 1:
                 _droppedCount[0,0] = 0;
-                _droppedCount[0,0] = 4;
+                _droppedCount[0,1] = 4;
                 _droppedCount[1,0] = 1;
                 _droppedCount[1,1] = 3;
                 break;
             case 2:
                 _droppedCount[0,0] = 0;
-                _droppedCount[0,0] = 5;
+                _droppedCount[0,1] = 5;
                 _droppedCount[1,0] = 1;
                 _droppedCount[1,1] = 2;
                 break;
         }
+        _health = 100.0f;
     }
     // Start is called before the first frame update
     public void DayEnd()
@@ -44,10 +47,16 @@ public class OreObject : MonoBehaviour
     public void Damaged(float damage)
     {
         _health -= damage;
+        Invoke("DamagedSound", 0.15f);
         if (_health <= 0)
         {
             DestroyOre();
         }
+    }
+
+    private void DamagedSound()
+    {
+        _sound.playEffectSound("PICKING");
     }
 
     private void DestroyOre()

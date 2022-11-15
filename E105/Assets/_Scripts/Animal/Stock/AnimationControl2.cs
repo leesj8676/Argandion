@@ -6,16 +6,7 @@ public class AnimationControl2 : MonoBehaviour {
 
 
 	string currentAnimation="";
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-		
-	}
 	public void SetAnimation(string animationName){
 		
 		if (currentAnimation != "") {

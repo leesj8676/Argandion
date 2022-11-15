@@ -30,6 +30,7 @@ public class Deer : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
+    public AudioSource _sound;
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽

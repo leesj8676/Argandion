@@ -38,6 +38,8 @@ public class Bear : MonoBehaviour
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
     [SerializeField] private PlayerSystem _playerSystem;
+    public AudioSource _sound;
+    public AudioClip attackedSound;
 
     //Item
     [SerializeField] private GameObject item20;  //동물의 가죽
@@ -138,6 +140,8 @@ public class Bear : MonoBehaviour
     {
         if (!isDead)
         {
+            _sound.clip = attackedSound;
+            _sound.Play();
             hp -= _dmg;
 
             if (hp <= 0)

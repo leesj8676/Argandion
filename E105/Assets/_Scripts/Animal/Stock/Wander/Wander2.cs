@@ -97,7 +97,7 @@ public class Wander2 : MonoBehaviour
 
     [HideInInspector]
     public bool showGizmos = false;
-
+    
     private Vector3 originalPos;
     private Animator animator;
     private Rigidbody rigidbody;

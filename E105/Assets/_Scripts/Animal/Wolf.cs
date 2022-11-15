@@ -39,6 +39,11 @@ public class Wolf : MonoBehaviour
     [SerializeField] private BoxCollider boxCol;
     private NavMeshAgent nav;
     [SerializeField] private Transform playerPos;
+    public AudioSource _sound;
+    public AudioClip howlingSound;
+    public AudioClip attackSound;
+    public AudioClip attackedSound;
+    public AudioClip idleSound;
 
 
     //Item
@@ -79,7 +84,6 @@ public class Wolf : MonoBehaviour
         }
 
     }
-
 
     //시간 경과 함수
     private void ElapseTime()
@@ -130,12 +134,20 @@ public class Wolf : MonoBehaviour
     {
         currentTime = idleTime;
         anim.SetTrigger("Idle");
+        if (Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) {
+            _sound.clip = idleSound;
+            _sound.Play();
+        }
     }
 
     private void Howling()
     {
         currentTime = howlTime;
         anim.SetTrigger("Howl");
+        if (Vector3.Distance(this.transform.position, playerPos.position) < 20.0f) {
+            _sound.clip = howlingSound;
+            _sound.Play();
+        }
     }
 
     private void TryWalk()
@@ -150,6 +162,9 @@ public class Wolf : MonoBehaviour
     {
         if (!isDead)
         {
+            Debug.Log("아얏");
+            _sound.clip = attackedSound;
+            _sound.Play();
             hp -= _dmg;
 
             if (hp <= 0)
@@ -202,6 +217,8 @@ public class Wolf : MonoBehaviour
         anim.SetTrigger("Attack");
         // yield return new WaitForSeconds(0.1f);
 
+        _sound.clip = attackSound;
+        _sound.Play();
         RaycastHit _hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out _hit, 3, targetMask))
         {

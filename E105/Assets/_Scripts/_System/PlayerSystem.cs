@@ -158,6 +158,7 @@ public class PlayerSystem : MonoBehaviour
             {
                 // transform.position += moveDir * Time.deltaTime * _runspeed;
                 speed = moveDir * _runspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
+                _sound.playerEffectSound("RUNNING");
                 // speed.y = -1f;
                 if (_onAir == 0)
                 {
@@ -171,6 +172,7 @@ public class PlayerSystem : MonoBehaviour
             {
                 // transform.position += moveDir * Time.deltaTime * _walkspeed;
                 speed = moveDir * _walkspeed * _movement_percent / 100 * (_buff.skyPray ? 1.3f : 1.0f) * (_buff.skySpirit ? 1.3f : 1.0f);
+                _sound.playerEffectSound("MOVING");
                 // speed.y = -1f;
                 if (_onAir == 0)
                 {
