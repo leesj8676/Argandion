@@ -14,6 +14,7 @@ public class Bear : MonoBehaviour
     private Vector3 destination;  //목적지
 
     //상태 변수
+    private bool isHurt = false;
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는중인지 아닌지
     private bool isRunning;  //뛰는중인지 아닌지
@@ -138,8 +139,10 @@ public class Bear : MonoBehaviour
 
     public void Damage(int _dmg)
     {
-        if (!isDead)
+        if (!isDead && !isHurt)
         {
+            isHurt = true;
+            Invoke("NotHurt", 0.5f);
             _sound.clip = attackedSound;
             _sound.Play();
             hp -= _dmg;
@@ -152,6 +155,11 @@ public class Bear : MonoBehaviour
 
             Chase();
         }
+    }
+
+    private void NotHurt()
+    {
+        isHurt = false;
     }
 
     private void Chase()

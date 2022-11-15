@@ -14,6 +14,7 @@ public class Rabbit : MonoBehaviour
     private Vector3 destination;  //목적지
 
     //상태 변수
+    private bool isHurt = false;
     private bool canFootSound = true;
     private bool isAction; //행동중인지 아닌지
     private bool isWalking; //걷는중인지 아닌지
@@ -174,8 +175,10 @@ public class Rabbit : MonoBehaviour
 
     public void Damage(int _dmg, Vector3 _targetPos)
     {
-        if (!isDead)
+        if (!isDead && !isHurt)
         {
+            isHurt = true;
+            Invoke("NotHurt", 0.5f);
             _sound.clip = attackedSound;
             _sound.Play();
             hp -= _dmg;
@@ -186,6 +189,11 @@ public class Rabbit : MonoBehaviour
             }
             Run(_targetPos);
         }
+    }
+
+    private void NotHurt()
+    {
+        isHurt = false;
     }
 
     private void Dead()
