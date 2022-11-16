@@ -671,7 +671,7 @@ public class PlayerSystem : MonoBehaviour
         {
             _health = _health_max;
         }
-        // _UIManager.setHealthBar(_health/_health_max);
+        _UIManager.setHealthBar(_health/_health_max);
     }
 
     public void damageHealth(float value)

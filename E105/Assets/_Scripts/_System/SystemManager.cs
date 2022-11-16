@@ -217,7 +217,7 @@ public class SystemManager : MonoBehaviour
         }
         foreach (var b in bears)
         {
-            Destroy(b);
+            // Destroy(b);
         }
         foreach (var i in items)
         {
