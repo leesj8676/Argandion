@@ -15200,6 +15200,14 @@ PrefabInstance:
       propertyPath: m_HeightmapPixelError
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5646664180433593798, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5646664181115619922, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5731655235295007931, guid: cf5a8ecb025e313438f779eee16e6c52, type: 3}
       propertyPath: m_Center.y
       value: 2

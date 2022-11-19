@@ -75,7 +75,7 @@ public class SectorObject : MonoBehaviour
     public void DayStart()
     {
         Check_Flower();
-        Check_Grid();
+        // Check_Grid();
     }
 
     private void Check_Flower()

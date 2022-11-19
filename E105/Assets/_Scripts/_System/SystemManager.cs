@@ -76,7 +76,19 @@ public class SystemManager : MonoBehaviour
     void Update()
     {
         TimeSystem();
+        TimeFast();
+    }
 
+    
+    private void TimeFast()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad0)) {
+            _hour_time_changemeter = 1000000;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad1)) {
+            _hour_time_changemeter = 1000;
+        }
     }
 
     private void UpdateSeason(int index)
