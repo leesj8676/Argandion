@@ -13,12 +13,12 @@ public class TreeObject : MonoBehaviour
     public GameObject[] _trees = new GameObject[8];
     public Collider _box;
     public GameObject _itemParent;
-    private SectorObject _sector;
+    // private SectorObject _sector;
     void Start()
     {
         _buff = GameObject.Find("BuffManager").GetComponent<BuffManager>();
         _itemParent = GameObject.Find("Items");
-        _sector = gameObject.transform.parent.GetComponent<SectorObject>();
+        // _sector = gameObject.transform.parent.GetComponent<SectorObject>();
     }
     public void DayEnd()
     {
@@ -51,7 +51,7 @@ public class TreeObject : MonoBehaviour
     {
         Transform trans = gameObject.transform;
         Quaternion qua = Quaternion.Euler(Random.Range(0f,360f),Random.Range(0f,360f),Random.Range(0f,360f));
-        _sector._tree_remain -= 1;
+        // _sector._tree_remain -= 1;
         Destroy(this.gameObject);
         if (!_isFallen)
         {
@@ -93,8 +93,8 @@ public class TreeObject : MonoBehaviour
         }
     }
 
-    public SectorObject getSector()
-    {
-        return _sector;
-    }
+    // public SectorObject getSector()
+    // {
+    //     return _sector;
+    // }
 }

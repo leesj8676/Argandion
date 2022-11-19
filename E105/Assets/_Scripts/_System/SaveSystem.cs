@@ -145,7 +145,7 @@ public class SaveSystem : MonoBehaviour
             saveJson.treepos.Add(trees[i].transform.position.y);
             saveJson.treepos.Add(trees[i].transform.position.z);
             saveJson.treeday.Add(trees[i].GetComponent<TreeObject>()._days);
-            saveJson.treeSector.Add(trees[i].GetComponent<TreeObject>().getSector()._sectorNumber);
+            // saveJson.treeSector.Add(trees[i].GetComponent<TreeObject>().getSector()._sectorNumber);
             saveJson.treebool.Add(trees[i].GetComponent<TreeObject>()._isFallen);
         }
         saveJson.treecount = trees.Length;

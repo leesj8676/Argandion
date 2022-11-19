@@ -425,6 +425,7 @@ public class PlayerSystem : MonoBehaviour
                     }
                     if (_equipList[_equipItem, 1] == 1 && col.TryGetComponent(out GatheringObject Gat))
                     {
+                        Debug.Log("이건인식해?");
                         if (Gat._isremain == false)
                         {
                             Gat.Interaction(_equipList[_equipItem, 1]);
