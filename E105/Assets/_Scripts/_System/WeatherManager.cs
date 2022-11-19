@@ -45,6 +45,9 @@ public class WeatherManager : MonoBehaviour
     public void SetWeather(int season)
     {
         _season = season;
+        systemManager._weather = 1;
+        playFX(1);
+        return ;
         if (_buffManager.blueSpirit) { // 파랑색 정령버프가 있으면 무조건 비가 온다.
             systemManager._weather = 1;
             _buffManager.blueSpirit = false;
