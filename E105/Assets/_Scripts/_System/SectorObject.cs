@@ -75,7 +75,9 @@ public class SectorObject : MonoBehaviour
     public void DayStart()
     {
         Check_Flower();
-        Check_Grid();
+        // if (_sectorNumber == 7) {
+        //     Check_Grid();
+        // }
     }
 
     private void Check_Flower()

@@ -7162,7 +7162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animalName: Wolf
-  hp: 50
+  hp: 75
   walkSpeed: 2
   runSpeed: 4
   waitTime: 1

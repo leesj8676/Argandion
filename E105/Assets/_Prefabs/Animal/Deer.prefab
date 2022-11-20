@@ -4483,7 +4483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animalName: Deer
-  hp: 70
+  hp: 50
   walkSpeed: 2
   runSpeed: 5
   waitTime: 1

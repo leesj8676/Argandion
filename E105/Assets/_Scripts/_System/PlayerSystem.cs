@@ -245,17 +245,48 @@ public class PlayerSystem : MonoBehaviour
 
             if (_equipList[_equipItem, 1] == 2)
             {
-                Collider[] dirts = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
-                foreach (var dirt in dirts)
+                Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
+                foreach (var soil in soils)
                 {
-                    if (dirt.CompareTag("dirt") && dirt.TryGetComponent(out Dirt dir))
+                    if (soil.tag == "dirt")
                     {
-                        dir.Hoe();
+                        soil.gameObject.TryGetComponent(out Dirt D);
+                        {
+                            if (!D.isReady) {
+                                D.Ready();
+                            } else if (!D.fullWater){
+                                D.Water();
+                            } else {
+                                Debug.Log("농사준비완료!");
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            if (_equipList[_equipItem, 1] == 7)
+            {
+                Debug.Log("몇번 누르지");
+                Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z), new Vector3(0, 1.5f, 0));
+                foreach (var soil in soils)
+                {
+                    if (soil.tag == "dirt")
+                    {
+                        soil.gameObject.TryGetComponent(out Dirt D);
+                        {
+                            if (D.fullWater && !_nearCrops) {
+                                Debug.Log("씨앗심기");
+                                Instantiate(_crops[(int)_equipList[_equipItem, 0]-212], nearSoil(_character.position), _character.rotation);
+                                _UIManager.quickUse((int)_equipList[_equipItem,0],1,_equipItem);
+                            } else {
+                                Debug.Log("씨앗못심기");
+                            }
+                        }
                     }
                 }
             }
-
-            // 괭이 사용
+            //이 사용
             // if (_equipList[_equipItem, 1] == 2)
             // {
             //     Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z) + (_character.forward * 0.5f), new Vector3(0.5f, 1.5f, 0.5f));
@@ -438,12 +469,13 @@ public class PlayerSystem : MonoBehaviour
     {
         if (Input.GetButtonDown("interactionKey") && _canInteract)
         {
+            // Debug.Log("발동!");
             Vector3 pos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-            _colset = Physics.OverlapSphere(pos, _interactRadius, layerMask: 1633);
+            _colset = Physics.OverlapSphere(pos, _interactRadius);
             // Debug.Log(_colset.Length);
             foreach (var col in _colset)
             {
-                // Debug.Log(col);
+                Debug.Log(col);
                 if (col.TryGetComponent(out Interactable inter))
                 {
                     Debug.Log(col);
@@ -474,19 +506,31 @@ public class PlayerSystem : MonoBehaviour
                             break;
                         }
                     }
-                    if (_equipList[_equipItem, 1] == 7 && col.TryGetComponent(out CropPosition crop))
-                    {
-                        if (crop._pd.fullWater) {
-                            if (crop._state==-1)
-                            {
-                                crop.Interaction((int)_equipList[_equipItem, 0]);
-                                _UIManager.quickUse((int)_equipList[_equipItem, 0],1,_equipItem);
-                                break;
-                            }
-                        }
-                    }
+                    // if (_equipList[_equipItem, 1] == 7)
+                    // {
+                    //     Debug.Log("몇번 누르지");
+                    //     Collider[] soils = Physics.OverlapBox(new Vector3(_character.position.x, _character.position.y, _character.position.z), new Vector3(0, 1.5f, 0));
+                    //     foreach (var soil in soils)
+                    //     {
+                    //         if (soil.tag == "dirt")
+                    //         {
+                    //             soil.gameObject.TryGetComponent(out Dirt D);
+                    //             {
+                    //                 if (D.fullWater && !_nearCrops) {
+                    //                     Debug.Log("씨앗심기");
+                    //                     Instantiate(_crops[(int)_equipList[_equipItem, 0]-212], nearSoil(_character.position), _character.rotation);
+                    //                     _UIManager.quickUse((int)_equipList[_equipItem,0],1,_equipItem);
+                    //                 } else {
+                    //                     Debug.Log("씨앗못심기");
+                    //                 }
+                    //             }
+                    //         }
+                    //     }
+                    // }
+
                     if (col.TryGetComponent(out Harvested harv))
                     {
+                        Debug.Log("이건");
                         harv.Harvesting();
                         break;
                     }
@@ -582,81 +626,81 @@ public class PlayerSystem : MonoBehaviour
         return new Vector3(tempx, pos.y, tempz);
     }
 
-    void fff()
-    {
-        if (_readyToHarvest && Input.GetKeyDown(KeyCode.F))
-        {
-            Harvested harvested = _nearObject.GetComponent<Harvested>();
-            harvested.Harvesting();
-            _nearCrops = false;
-            _nearObject = null;
-            _readyToHarvest = false;
-            return;
-        }
+    // void fff()
+    // {
+    //     if (_readyToHarvest && Input.GetKeyDown(KeyCode.F))
+    //     {
+    //         Harvested harvested = _nearObject.GetComponent<Harvested>();
+    //         harvested.Harvesting();
+    //         _nearCrops = false;
+    //         _nearObject = null;
+    //         _readyToHarvest = false;
+    //         return;
+    //     }
 
-        if (_nearItem && Input.GetKeyDown(KeyCode.F))
-        {
-            Item item = _nearObject.GetComponent<Item>();
-            ItemObject itemObject = item.itemObject;
-            if (itemObject != null)
-            {
-                _theInventory.AcquireItem(itemObject);
-            }
-        }
+    //     if (_nearItem && Input.GetKeyDown(KeyCode.F))
+    //     {
+    //         Item item = _nearObject.GetComponent<Item>();
+    //         ItemObject itemObject = item.itemObject;
+    //         if (itemObject != null)
+    //         {
+    //             _theInventory.AcquireItem(itemObject);
+    //         }
+    //     }
 
 
-        if (_nearCarpentor && Input.GetButtonDown("fff"))
-        {
-            CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
-            combCarpentor.Trade(2, 2);
-        }
+    //     if (_nearCarpentor && Input.GetButtonDown("fff"))
+    //     {
+    //         CombCarpentor combCarpentor = _nearObject.GetComponent<CombCarpentor>();
+    //         combCarpentor.Trade(2, 2);
+    //     }
 
-        if (_nearChest && Input.GetButtonDown("fff"))
-        {
-            ItemObject item = _theInventory.StoreItem(invenIdx, -invenCount);
-            Debug.Log(item);
-            _theChest.PutItem(item, invenCount);
-        }
+    //     if (_nearChest && Input.GetButtonDown("fff"))
+    //     {
+    //         ItemObject item = _theInventory.StoreItem(invenIdx, -invenCount);
+    //         Debug.Log(item);
+    //         _theChest.PutItem(item, invenCount);
+    //     }
 
-        if (_nearChest && Input.GetKeyDown(KeyCode.G))
-        {
-            ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
-            Debug.Log("햇당");
-            Debug.Log(item);
-            _theInventory.AcquireItem(item, chestCount);
-        }
+    //     if (_nearChest && Input.GetKeyDown(KeyCode.G))
+    //     {
+    //         ItemObject item = _theChest.TakeItem(chestIdx, -chestCount);
+    //         Debug.Log("햇당");
+    //         Debug.Log(item);
+    //         _theInventory.AcquireItem(item, chestCount);
+    //     }
 
-        if (_nearSpirit && Input.GetButtonDown("fff"))
-        {
-            if (_buff._isFlowerBuffActived)
-            {
-                Debug.Log("이미 다른버프가 발동중이라구!");
-            }
-            else if (_buff._isPrayBuffActived)
-            {
-                Debug.Log("제단 버프 진행중");
-            }
-            else
-            {
-                ItemObject item = _theInventory.StoreItem(0, -1);
-                if (item.Category == "꽃")
-                {
-                    SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
-                    // spirit.Spirit(item);
-                    _buff._isFlowerBuffActived = true;
-                }
-                else if (item.ItemCode == 0)
-                {
-                    Debug.Log("아무것도 없는데?");
-                }
-                else
-                {
-                    _theInventory.AcquireItem(item, 1);
-                    Debug.Log("이건뭐야?");
-                }
-            }
-        }
-    }
+    //     if (_nearSpirit && Input.GetButtonDown("fff"))
+    //     {
+    //         if (_buff._isFlowerBuffActived)
+    //         {
+    //             Debug.Log("이미 다른버프가 발동중이라구!");
+    //         }
+    //         else if (_buff._isPrayBuffActived)
+    //         {
+    //             Debug.Log("제단 버프 진행중");
+    //         }
+    //         else
+    //         {
+    //             ItemObject item = _theInventory.StoreItem(0, -1);
+    //             if (item.Category == "꽃")
+    //             {
+    //                 SpiritBuff spirit = _nearObject.GetComponent<SpiritBuff>();
+    //                 // spirit.Spirit(item);
+    //                 _buff._isFlowerBuffActived = true;
+    //             }
+    //             else if (item.ItemCode == 0)
+    //             {
+    //                 Debug.Log("아무것도 없는데?");
+    //             }
+    //             else
+    //             {
+    //                 _theInventory.AcquireItem(item, 1);
+    //                 Debug.Log("이건뭐야?");
+    //             }
+    //         }
+    //     }
+    // }
     void watering()
     {
         if (_onSoil && Input.GetKeyDown(KeyCode.G))

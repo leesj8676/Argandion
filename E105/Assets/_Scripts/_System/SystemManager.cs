@@ -82,7 +82,22 @@ public class SystemManager : MonoBehaviour
     void Update()
     {
         TimeSystem();
+        TimeFast();
+    }
 
+    private void TimeFast()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad0)) {
+            _hour_time_changemeter = 1000000;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad1)) {
+            _hour_time_changemeter = 1000;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad2)) {
+            _hour_time_changemeter = 400000;
+        }
     }
 
     private void UpdateSeason(int index)
@@ -224,7 +239,7 @@ public class SystemManager : MonoBehaviour
                 RenderSettings.skybox = _SkyBoxMat[1];
                 _isnight = true;
             }
-            RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.5f);
+            // RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.5f);
         }
     }
 
@@ -328,13 +343,13 @@ public class SystemManager : MonoBehaviour
         _UIManager.DayStart();
         // Debug.Log("시스템 데이스탕트1");
         _PrayBuff.DayStart();
-        foreach (var dirt in _dirts)
-        {
-            if (dirt)
-            {
-                dirt.DayStart();
-            }
-        }
+        // foreach (var dirt in _dirts)
+        // {
+        //     if (dirt)
+        //     {
+        //         dirt.DayStart();
+        //     }
+        // }
 
         // _buiding1.DayStart();
         foreach (var building in _buildings)

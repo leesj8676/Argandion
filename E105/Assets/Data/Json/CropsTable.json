@@ -46,28 +46,28 @@
       "CropCode" : 6,
       "CropName": "양상추1",
       "Water": 20,
-      "NextPhaseDay": 6,
+      "NextPhaseDay": 2,
       "Season": 0
     },
     {
       "CropCode" : 7,
       "CropName": "양상추2",
       "Water": 20,
-      "NextPhaseDay": 6,
+      "NextPhaseDay": 2,
       "Season": 0
     },
     {
       "CropCode" : 8,
       "CropName": "토마토1",
       "Water": 25,
-      "NextPhaseDay": 3,
+      "NextPhaseDay": 2,
       "Season": 1
     },
     {
       "CropCode" : 9,
       "CropName": "토마토2",
       "Water": 25,
-      "NextPhaseDay": 3,
+      "NextPhaseDay": 2,
       "Season": 1
     },
     {
