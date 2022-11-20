@@ -76,7 +76,22 @@ public class SystemManager : MonoBehaviour
     void Update()
     {
         TimeSystem();
+        TimeFast();
+    }
 
+    private void TimeFast()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad0)) {
+            _hour_time_changemeter = 1000000;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad1)) {
+            _hour_time_changemeter = 1000;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad2)) {
+            _hour_time_changemeter = 400000;
+        }
     }
 
     private void UpdateSeason(int index)
@@ -156,9 +171,9 @@ public class SystemManager : MonoBehaviour
                     _hour = ((_buffManager.whitePray || _buffManager.whiteSpirit) ? 5 : 6);
                     _day += 1;
 
-                    if (_day >= 29)
+                    if (_day >= 2)
                     {
-                        _day -= 28;
+                        _day -= 1;
                         _month += 1;
 
                         if (_month >= 9)
